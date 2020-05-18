@@ -11,3 +11,7 @@ deploy:
   provider: heroku
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
+  local_dir: build
+  strategy: api
+  on:
+    branch: master
