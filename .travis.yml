@@ -8,10 +8,9 @@ script:
   - yarn run build
 
 deploy:
-- provider: heroku
-  edge: true
-  # skip-cleanup: true
-  # github-token: $GITHUB_TOKEN
-  # local_dir: build
-  # on:
-  #   branch: master
+  provider: heroku
+  api_key: $API_KEY
+  github-token: $GITHUB_TOKEN
+  skip-cleanup: true
+  on:
+    branch: master
