@@ -14,3 +14,4 @@ deploy:
   skip-cleanup: true
   on:
     branch: master
+  edge: true
