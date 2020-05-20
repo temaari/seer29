@@ -14,3 +14,7 @@ deploy:
   skip-cleanup: true
   on:
     branch: master
+
+after_deploy:
+  - npm install -g serve
+  - serve -s build
