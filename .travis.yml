@@ -4,8 +4,8 @@ node_js:
 cache: npm
 
 script:
-  - yarn test
-  - yarn build
+  - npm test
+  - npm run build
 
 deploy:
   provider: heroku
@@ -14,7 +14,3 @@ deploy:
   skip-cleanup: true
   on:
     branch: master
-
-after_deploy:
-  - npm install -g serve
-  - serve -s build
