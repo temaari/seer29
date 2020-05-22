@@ -8,8 +8,9 @@ const PORT = process.env.PORT || 8080;
 
 const routes = require('./routes/api')
 
+const MONGODB_URL = 'mongodb+srv://christian:damars0nBars@seer29-tipk9.mongodb.net/test?retryWrites=true&w=majority'
 // Setting up MongoDB
-mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/seer29' , {
+mongoose.connect(/*process.env.*/MONGODB_URL ,{//|| 'mongodb://localhost/seer29' , {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });

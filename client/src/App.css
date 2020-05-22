@@ -20,8 +20,13 @@ form {
   outline: none;
 }
 
-.blog-post_display {
-  border: 1px solid lightgray;
+.header {
+  text-align: center;
+}
+
+.articles_display {
+  border: 1px solid rgb(78, 133, 235);
+  background-color: #007bff;
   margin: 5px 0px;
   border-radius: 4px;
   padding: 10px;

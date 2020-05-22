@@ -5,20 +5,30 @@ import './App.css';
 class App extends React.Component {
 
   state = {
+    author: '',
     title: '',
-    body: '',
-    posts: []
+    journal: '',
+    year: '',
+    month: '',
+    volume: '',
+    number: '',
+    pages: '',
+    eprint: '',
+    eprinttype: '',
+    eprintclass: '',
+    annote:'',
+    articles: []
   };
 
   componentDidMount = () => {
-    this.getPlogPost();
+    this.getArticles();
   };
 
-  getPlogPost = () => {
+  getArticles = () => {
     axios.get('/api')
       .then((response) => {
         const data = response.data;
-        this.setState({ posts: data });
+        this.setState({ articles: data });
         console.log('Data has been received!!');
       })
       .catch(() => {
@@ -36,8 +46,18 @@ class App extends React.Component {
     event.preventDefault();
 
     const payload = {
+      author: this.state.author,
       title: this.state.title,
-      body: this.state.body
+      journal: this.state.journal,
+      year: this.state.year,
+      month: this.state.month,
+      volume: this.state.volume,
+      number: this.state.number,
+      pages: this.state.pages,
+      eprint: this.state.eprint,
+      eprinttype: this.state.eprinttype,
+      eprintclass: this.state.eprintclass,
+      annote: this.state.annote
     };
 
     axios({
@@ -48,7 +68,7 @@ class App extends React.Component {
       .then(() => {
         console.log('Data has been sent to the server');
         this.resetUserInputs();
-        this.getPlogPost();
+        this.getArticles();
       })
       .catch(() => {
         console.log('Internal server error');
@@ -57,18 +77,28 @@ class App extends React.Component {
 
   resetUserInputs = () => {
     this.setState({
+      author: '',
       title: '',
-      body: ''
+      journal: '',
+      year: '',
+      month: '',
+      volume: '',
+      number: '',
+      pages: '',
+      eprint: '',
+      eprinttype: '',
+      eprintclass: '',
+      annote:''
     });
   };
 
-  displayBlogPost = (posts) => {
-    if (!posts.length) return null;
+  displayArticles = (articles) => {
+    if (!articles.length) return null;
 
-    return posts.map((post, index) => (
-      <div key={index} className="blog-post_display">
-        <h3 className="">{post.title}</h3>
-        <p>{post.body}</p>
+    return articles.map((article, index) => (
+      <div key={index} className="articles_display">
+        <h3 className="">{article.author}</h3>
+        <p>{article.title}</p>
       </div>
     ));
   };
@@ -79,33 +109,13 @@ class App extends React.Component {
 
     return(
       <div className="app">
-        <h2>Welcome to the seer app</h2>
+        <h2 className="header" >Welcome to the seer app</h2>
         <form onSubmit={this.submit}>
-          <div className="form-input">
-            <input 
-              type="text"
-              name="title"
-              placeholder="title"
-              value={this.state.title}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-input">
-            <textarea 
-              placeholder="body" 
-              name="body" 
-              cols="30" 
-              rows="10" 
-              value={this.state.body} 
-              onChange={this.handleChange} 
-            >   
-            </textarea>
-          </div>
-          <button>Submit</button>
+          {/* <button>Submit</button> */}
         </form>
 
         <div className="blog-">
-          {this.displayBlogPost(this.state.posts)}
+          {this.displayArticles(this.state.articles)}
         </div>
       </div>
     );
