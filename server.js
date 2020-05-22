@@ -6,10 +6,10 @@ const  path = require('path');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// Setting up MongoDB
-const MONGODB_URL = 'mongodb+srv://christian:damars0nBars@seer29-tipk9.mongodb.net/test?retryWrites=true&w=majority';
+const routes = require('./routes/api')
 
-mongoose.connect(MONGODB_URL , {
+// Setting up MongoDB
+mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/seer29' , {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -18,58 +18,16 @@ mongoose.connection.on('connected', () => {
     console.log('Mongoose is connected!!!');
 });
 
-// Schema
-const Schema = mongoose.Schema;
-const BlogPostSchema = new Schema({
-    title: String,
-    body: String,
-    date: {
-        type: String,
-        default: Date.now()
-    }
-});
-
-// Model
-const BlogPost = mongoose.model('BlogPost', BlogPostSchema);
-
-// Saving data to mongo Db
-const data  = {
-    title: 'welcome to the channel',
-    body: 'I help people have software engineering programming and fun stuff like that'
-};
-
-const newBlogPost = new BlogPost(data); //instance of the model
-
-// .save();
-// newBlogPost.save( (error) => {
-//     if (error) {
-//         console.log('Opps and error happened');
-//     } else {
-//         console.log('Data has been saved');
-//     }
-// });
+// Data parsing
+app.use(express.json());
+app.use(express.urlencoded({ extended: false}));
 
 // http request logger
 app.use(morgan('tiny'));
+app.use('/api', routes);
 
-// routes
-app.get('/api', (req, res) => {
-    BlogPost.find({ })
-        .then((data) => {
-            console.log('Data: ', data)
-            res.json(data);
-        })
-        .catch((error) => {
-            console.log('Error: ', error)
-        });
-});
-
-app.get('/api/name', (req, res) => {
-    const data = {
-        username: 'Briana MacKay',
-        add: 19
-    };
-    res.json(data);
-});
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('seer29/build'));
+}
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));
