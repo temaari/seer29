@@ -2,11 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 
-const BlogPost = require('../models/blogpost')
+const Article = require('../models/articleInfo')
 
 // routes
 router.get('/', (req, res) => {
-    BlogPost.find({ })
+    Article.find({ })
         .then((data) => {
             console.log('Data: ', data)
             res.json(data);
@@ -17,19 +17,11 @@ router.get('/', (req, res) => {
     );
 });
 
-router.get('/name', (req, res) => {
-    const data = {
-        username: 'Briana MacKay',
-        add: 19
-    };
-    res.json(data);
-});
-
 router.post('/save', (req, res) => {
     const data = req.body;
 
-    const newBlogPost = new BlogPost(data);
-    newBlogPost.save((error) => {
+    const newArticle = new Article(data);
+    newArticle.save((error) => {
         if (error) {
             res.status(500).json({ msg: 'Sorry, internal server errors' });
             return;
