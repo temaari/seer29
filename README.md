@@ -7,5 +7,7 @@ npm run-script install-client
 
 npm install mongoose express axios morgan concurrently -S
 
+npm install -g nodemon
+
 npm run dev
 

@@ -8,8 +8,14 @@ const PORT = process.env.PORT || 8080;
 
 const routes = require('./routes/api')
 
-// Setting up MongoDB
-mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/seer29' , {
+const MONGODB_URL = 'mongodb+srv://christian:damars0nBars@seer29-tipk9.mongodb.net/test?retryWrites=true&w=majority'
+// this is for deployment and further progression
+// mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/seer29' , {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// });
+//This is for now before we try munipulate the DB
+mongoose.connect(MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
