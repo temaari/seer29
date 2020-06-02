@@ -111,7 +111,7 @@ class App extends React.Component {
     return(
       <div className="app">
         <h2 className="header" >Welcome to the seer app</h2>
-        <div>{Search}</div>
+        <Search/>
 
         <div className="blog-">
           {this.displayArticles(this.state.articles)}
