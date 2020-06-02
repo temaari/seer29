@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
-import {Search} from '../components/Search';
+import {Search} from './components/Search.js';
 
 class App extends React.Component {
 
