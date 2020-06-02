@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
+import {Search} from '../components/Search';
 
 class App extends React.Component {
 
@@ -110,9 +111,7 @@ class App extends React.Component {
     return(
       <div className="app">
         <h2 className="header" >Welcome to the seer app</h2>
-        <form onSubmit={this.submit}>
-          {/* <button>Submit</button> */}
-        </form>
+        <div>{Search}</div>
 
         <div className="blog-">
           {this.displayArticles(this.state.articles)}
