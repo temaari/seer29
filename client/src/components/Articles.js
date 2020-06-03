@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {Search} from './Search.js';
 import '../App.css';
 
 export class Articles extends React.Component {
@@ -38,9 +39,10 @@ export class Articles extends React.Component {
 
     render() {
         return(
-        <div className="blog-">
-            {this.displayArticles(this.state.articles)}
-        </div>
+            <div className="blog-">
+                <Search/>
+                {this.displayArticles(this.state.articles)}
+            </div>
         )
     }
 }
