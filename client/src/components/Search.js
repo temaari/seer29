@@ -6,7 +6,7 @@ export class Search extends React.Component {
     
     displayArticles = (articles) => {
         if (!articles.length) return null;
-
+        
         let filterArticles = articles.filter(searchingFor(this.props.term)).map((article, i) => (
             <ArticleCard 
                 index={i}

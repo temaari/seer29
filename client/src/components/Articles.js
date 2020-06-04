@@ -18,20 +18,14 @@ const options = [
 
 export class Articles extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state ={
-            startDate : null,
-            endDate: null
-        }
-    }
-
     state = {
         description: "",
         selectedOptionSE: "",
+        startDate: null,
+        endDate: null,
         articles: []
-    }
 
+    }
 
     // alertStartDate = () => {
     //     alert(this.state.startDate);
@@ -91,7 +85,7 @@ export class Articles extends React.Component {
                     <br></br>
 
                     <label for="date range">Choose Date Range -</label>
-                    {/* <br/> */}
+                    <br/>
                     <DateRangePicker
                         startDate={this.state.startDate} // momentPropTypes.momentObj or null,
                         startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
@@ -102,7 +96,7 @@ export class Articles extends React.Component {
                         onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })} // PropTypes.func.isRequired,
                         focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                         onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
-                        /* numberOfMonths={()=> 1}  */
+                        numberOfMonths={()=> 1}
                         isOutsideRange={()=> false} //show previous dates as well 
                         maximumDate={addDays(new Date(), 0)} //should only allow "to" is current date and not future dates
                         showClearDates={true} //allow us to clear dates
@@ -110,11 +104,11 @@ export class Articles extends React.Component {
                         
                     />
                     {/* Date range */}
-                    {/* <label for="dateRange">Date Range</label> */}
+                    <label for="dateRange">Date Range</label>
 
                     {/* this is for the buttons to show the dates chosen */}
-                    {/* <button onCLick={this.alertStartDate}>Click Me for Start Date</button> 
-                    <button onCLick={this.alertEndDate}>Click Me for Start Date</button> */}
+                    {/* <button onCLick={this.alertStartDate()}>Click Me for Start Date</button> 
+                    <button onCLick={this.alertEndDate()}>Click Me for Start Date</button> */}
 
                     <br></br>
                     <label>Select SE Practice(s)</label>
@@ -130,7 +124,10 @@ export class Articles extends React.Component {
                     <input type="submit" value="Search"></input>
                 </form> 
                 <div>
-                    <Search articles={this.state.articles} term={this.state.description}/>
+                    <Search 
+                        articles={this.state.articles} 
+                        term={this.state.description}
+                    />
                 </div>
             </div> 
         );
