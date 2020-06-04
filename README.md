@@ -7,6 +7,8 @@ npm run-script install-client
 
 npm install mongoose express axios morgan concurrently -S
 
+npm i -S react-multiselect-checkboxes
+
 npm install -g nodemon
 
 npm run dev

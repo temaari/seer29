@@ -2,6 +2,7 @@ import React from 'react';
 import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
 import '../App.css';
 
+
 const options = [
     { value: 'TDD', label: 'Test Driven Development' },
     { value: 'OOP', label: 'Object Orientated Programming' },
@@ -9,9 +10,29 @@ const options = [
   ];
 
 export class Search extends React.Component {
-    
+
+    state = {
+        description: "",
+        selectedOptionSE: ""
+    }
+
+    handleSelectedSE = selectedOptionSE => {
+        this.setState(
+            { selectedOptionSE },
+            () => console.log(`Option selected:`, this.state.selectedOptionSE)
+        )
+    }
+
+    handleDescriptionInput = (e) => {
+        this.setState({
+            description: e.target.value
+        })
+    }
 
     render() {
+        const { description } = this.state;
+        const { selectedOptionSE } = this.state;
+        
         return(
             <div class="div_border">
                 <form>
@@ -23,21 +44,27 @@ export class Search extends React.Component {
                     <br></br>
 
                     <label for="description">Description  </label>
-                    <input id="description" type="text" placeholder="Enter search description"></input>
+                    <input id="description" type="text" onChange="this.handleDescriptionInput()" placeholder="Enter search description"></input>
 
                     <br></br>
                     <br></br>
-        
+
                     {/* Date range */}
                     {/* <label for="dateRange">Date Range</label> */}
 
+                    <br></br>
                     <label>Select SE Practice(s)</label>
-                    <ReactMultiSelectCheckboxes options={options} />
+                    <ReactMultiSelectCheckboxes 
+                        value={selectedOptionSE}
+                        onChange={this.handleSelectedSE}
+                        options={options} 
+                    />
 
                     <br></br>
+                    <br></br>
 
-                    <input type="submit" value="Save"></input>
-                    <input type="submit" value="Search"></input>
+                    <input type="submit" onChange="" value="Save"></input>
+                    <input type="submit" onClick="this.getSelectedConstraints()" value="Search"></input>
                 </form> 
             </div> 
         );
