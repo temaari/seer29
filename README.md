@@ -11,5 +11,7 @@ npm i -S react-multiselect-checkboxes
 
 npm install -g nodemon
 
+npm install bootstrap react-dates -S
+
 npm run dev
 
