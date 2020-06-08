@@ -11,6 +11,7 @@ export class ArticleCard extends React.Component {
                 <p>Author {this.props.author}</p>
                 <p>Date {this.props.month} {this.props.year}</p>
                 <p>Annote: {this.props.annote}</p>
+                <p>results</p>
             </div>
         )
     }

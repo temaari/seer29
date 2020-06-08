@@ -11,21 +11,21 @@ import { DateRangePicker } from 'react-dates';
 import { addDays } from 'date-fns';
 
 const options = [
-    { value: 'TDD', label: 'Test Driven Development' },
-    { value: 'OOP', label: 'Object Orientated Programming' },
-    { value: 'DynP', label: 'Dynamic Programming' },
+    { value: 'Test Driven Development', label: 'Test Driven Development' },
+    { value: 'BDD', label: 'BDD' },
+    { value: 'Planning Poker', label: 'Planning Poker' },
 ];
 
 export class Articles extends React.Component {
 
     state = {
         description: "",
-        selectedOptionSE: "",
+        selectedSE: null,
         startDate: null,
         endDate: null,
         articles: []
 
-    }
+    };
 
     // alertStartDate = () => {
     //     alert(this.state.startDate);
@@ -51,13 +51,14 @@ export class Articles extends React.Component {
             });
     };
 
-    handleSelectedSE = (event) => {
-        // this.setState(
-        //     { selectedOptionSE },
-        //     () => console.log(`Option selected:`, this.state.selectedOptionSE)
-        // )
-        // console.log(event.target);
-    }
+    handleSelectedSE = selectedSE => {
+        this.setState(
+            { selectedSE },
+            () => console.log(`Option selected:`, this.state.selectedSE)
+            );
+            
+        // console.log(event.target.value);
+    };
 
     handleDescriptionInput = (e) => {
         this.setState({
@@ -67,7 +68,7 @@ export class Articles extends React.Component {
     }
 
     render() {
-        
+        const { selectedSE } = this.state;
         return(
             <div className="div_border">
                 <form>
@@ -91,20 +92,18 @@ export class Articles extends React.Component {
                         startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
                         endDate={this.state.endDate} // momentPropTypes.momentObj or null,
                         endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
-                        startDatePlaceholderText="from"
-                        endDatePlaceholderText="to"
+                        startDatePlaceholderText="2000"
+                        endDatePlaceholderText="2020"
                         onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })} // PropTypes.func.isRequired,
                         focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                         onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
-                        numberOfMonths={()=> 1}
+                        // numberOfMonths={()=> 1}
                         isOutsideRange={()=> false} //show previous dates as well 
                         maximumDate={addDays(new Date(), 0)} //should only allow "to" is current date and not future dates
                         showClearDates={true} //allow us to clear dates
                         
                         
                     />
-                    {/* Date range */}
-                    <label for="dateRange">Date Range</label>
 
                     {/* this is for the buttons to show the dates chosen */}
                     {/* <button onCLick={this.alertStartDate()}>Click Me for Start Date</button> 
@@ -113,6 +112,7 @@ export class Articles extends React.Component {
                     <br></br>
                     <label>Select SE Practice(s)</label>
                     <ReactMultiSelectCheckboxes 
+                        value={selectedSE}
                         onChange={this.handleSelectedSE}
                         options={options} 
                     />
@@ -127,6 +127,8 @@ export class Articles extends React.Component {
                     <Search 
                         articles={this.state.articles} 
                         term={this.state.description}
+                        sePractices={this.state.selectedSE}
+                        startdate={this.state.startDate}
                     />
                 </div>
             </div> 
