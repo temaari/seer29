@@ -1,71 +1,95 @@
 import React from 'react';
 import '../App.css';
-import {ArticleCard} from './ArticleCard.js';
+import MUIDataTable from "mui-datatables";
 
 export class Search extends React.Component {
     
-    
-    displayArticles = (articles) => {
+    displayArticles(articles) {
         if (!articles.length) return null;
-        
-        const SeString = props => {
-            const seString = this.props.selectedSE.reduce (
-                (preValue, currentValue) => preValue + " , " + currentValue.value
-            ) ;
+        const columns = [
+            {
+                name: "title",
+                label: "Title",
+                options: {
+                    filter: true,
+                    sort: true,
+                }
+            },
+            {
+                name: "author",
+                label: "Author",
+                options: {
+                    filter: true,
+                    sort: false,
+                }
+            },
+            {
+                name: "year",
+                label: "Year",
+                options: {
+                    filter: true,
+                    sort: true,
+                }
+            },
+            {
+                name: "seMethod",
+                label: "SE Method",
+                options: {
+                    filter: true,
+                    sort: true,
+                }
+            },
+            {
+                name: "result",
+                label: "Result",
+                options: {
+                    display: "false",
+                    filter: true,
+                    sort: false,
+                }
+            },
+        ];
+
+        const data = [];
+
+        articles.forEach(element => {
+            data.push({
+                title: element.title,
+                author: element.author,
+                year: element.year,
+                seMethod: element.sePractice
+            });
+        });
+
+           
+        const options = {
+            filterType: 'dropdown',
+            disableToolbarSelect:true,
+            print:false,
+            download:false,
+            search:false
         };
 
-        let filterArticles = articles.filter(searchingFor(this.props.term)).map((article, i) => (
-            <ArticleCard 
-                index={i}
-                title={article.title}
-                author={article.author}
-                month={article.month}
-                year={article.year}
-                annote={article.annote}
-            />
-        ));
-
-        // let filterArticles = articles.filter(searchingByPractice(SeString)).map((article, i) => (
-        //     <ArticleCard 
-        //         index={i}
-        //         title={article.title}
-        //         author={article.author}
-        //         month={article.month}
-        //         year={article.year}
-        //         annote={article.annote}
-        //     />
-        // ));
-        
-        // let nextArticleTry = filterArticles.filter((someFilter) => {
-        //     return someFilter.sePractice.toLowerCase().includes(("403").toLowerCase());
-        // });
-        
-
-        return filterArticles;
-    };
+        return (
+            <div>
+                <MUIDataTable
+                    // title={"Employee List"}
+                    data={data}
+                    columns={columns}
+                    options={options}
+                />
+            </div>
+        )
     
+    }
+
     render() {
-        return(
+        return (
             <div className="blog-">
                 {this.displayArticles(this.props.articles)}
             </div>
         )
     }
+        
 }
 
-// function searchingByPractice(SeString) {
-//     return function (x) {
-//         if (SeString !== null) {
-//         return (x.sePractice.includes(SeString) || !SeString)
-//         }
-//     }   
-// }
-
-function searchingFor(term) {
-    return function (x) {
-        if (term !== null) {
-        return (x.title.toLowerCase().includes(term.toLowerCase())
-            || !term)
-        }
-    }   
-}

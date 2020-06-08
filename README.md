@@ -7,11 +7,14 @@ npm run-script install-client
 
 npm install mongoose express axios morgan concurrently -S
 
-npm i -S react-multiselect-checkboxes
+npm install -g nodemon (first time only)
 
-npm install -g nodemon
+npm i @material-ui/core
 
-npm install bootstrap react-dates -S
+npm i @material-ui/icons
+
+npm install mui-datatables --save
+
 
 npm run dev
 
