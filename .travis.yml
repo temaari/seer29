@@ -3,8 +3,13 @@ node_js:
   - 10.16.1
 cache: npm
 
-script:
+install:
   - npm run-script install-client
+  - npm i @material-ui/core
+  - npm i @material-ui/icons
+  - npm install mui-datatables --save
+
+script:
   - npm run-script test
   - npm run-script build
 
