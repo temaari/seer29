@@ -14,7 +14,9 @@ const ArticleSchema = new Schema({
     eprint: String,
     eprinttype: String,
     eprintclass: String,
-    annote: String
+    annote: String,
+    sePractice: String,
+    participants: String
 });
 
 // Model

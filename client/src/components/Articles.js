@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {Search} from './Search.js'
 import '../App.css';
 
 export class Articles extends React.Component {
@@ -7,11 +8,11 @@ export class Articles extends React.Component {
     state = {
         articles: []
     };
-      
+
     componentDidMount = () => {
         this.getArticles();
     };
-    
+
     getArticles = () => {
         axios.get('/api')
             .then((response) => {
@@ -25,22 +26,13 @@ export class Articles extends React.Component {
             });
     };
 
-    displayArticles = (articles) => {
-        if (!articles.length) return null;
-
-        return articles.map((article, index) => (
-            <div key={index} className="articles_display">
-                <h3 className="">{article.author}</h3>
-                <p>{article.title}</p>
-            </div>
-        ));
-    };
-
     render() {
         return(
-        <div className="blog-">
-            {this.displayArticles(this.state.articles)}
-        </div>
-        )
+            <div>
+                <Search 
+                    articles={this.state.articles}
+                />
+            </div>
+        );
     }
 }

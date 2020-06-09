@@ -8,12 +8,11 @@ class App extends React.Component {
 
     return(
       <div className="app">
-        <h2 className="header" >Welcome to the seer app </h2>
+        <h2 className="header" >Welcome to the seer app</h2>
+
         <div> {/* Display Articles */}
           <Articles/>
         </div>
-
-        
       </div>
     );
   }
